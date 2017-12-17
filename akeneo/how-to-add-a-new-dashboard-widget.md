@@ -44,7 +44,7 @@ Register widget as a tagged service:
 
 ```yaml
 services:
-    pim_dashboard.widget.my_widget:
+    pacme_app.widget.ziggy_widget:
         class: Acme\Bundle\AppBundle\Widget\ZiggyWidget
         tags:
             # Set negative value for the position to make your widget above others
