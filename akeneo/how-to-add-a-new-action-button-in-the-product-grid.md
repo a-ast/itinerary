@@ -64,6 +64,9 @@ See other actions: `vendor/akeneo/pim-community-dev/src/Oro/Bundle/DataGridBundl
 3. Register the listener and the action
 ```yaml
 
+# src/Acme/Bundle/AppBundle/Resources/config/services.yml
+
+services:
     acme.event_listener.product_grid_before_listener:
         class: Acme\Bundle\AppBundle\EventListener\PreviewActionProductGridListener
         tags:
@@ -106,6 +109,7 @@ See more actions: `vendor/akeneo/pim-community-dev/src/Pim/Bundle/DataGridBundle
 
 
 ```yaml
+# src/Acme/Bundle/AppBundle/Resources/config/requirejs.yml
 
 config:
     paths:
@@ -122,5 +126,5 @@ config:
 
 1. Go to your product grid
 2. Now you can see a new action icon in the grid row (4th icon):
-![New action icon](image/widget/new-preview-action.png)
+![New action icon](image/new-preview-action.png)
 3. Click on it and see an alert.
