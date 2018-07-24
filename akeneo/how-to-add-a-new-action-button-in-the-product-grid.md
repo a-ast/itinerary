@@ -1,6 +1,7 @@
 # How to add a new action button in the product grid
 
-Idea: add new button to the product grid. Show a simple alert with product id by clicking on this button for the sake of a demo.
+Idea: add new button to the product grid. 
+Show a simple alert with product id by clicking on this button for the sake of demonstration.
 
 ### Backend part
  
