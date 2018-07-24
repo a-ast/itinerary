@@ -4,7 +4,7 @@ Idea: add new button to the product grid. Show a simple alert with product id by
 
 ### Backend part
  
-1. Implement an event listener that modifies a datagrid configuration.
+1. Implement an event listener that modifies a datagrid configuration
 
 ```php
 <?php
@@ -32,17 +32,16 @@ class PreviewActionProductGridListener
             'type' => 'preview-product',
             'link' => 'ajax',
         ];
+        
+        // Extend the datagrid config with the config for our action 
         $datagridConfig->offsetSetByPath('[actions][preview]', $newAction);
     }
-
 }
-
 ```
 
-2. Implement new action class with no logic
+2. Implement a new action class with no logic
 
 ```php
-
 <?php
 
 // src/Acme/Bundle/AppBundle/Datagrid/PreviewProductAction.php
@@ -55,7 +54,6 @@ class PreviewProductAction extends AbstractAction
 {
 
 }
-
 ```
 
 See other actions: `vendor/akeneo/pim-community-dev/src/Oro/Bundle/DataGridBundle/Extension/Action/Actions`
@@ -84,7 +82,6 @@ services:
 1. Implement action login in JavaScript
 
 ```javascript
-
 // src/Acme/Bundle/AppBundle/Resources/public/js/datagrid/action/preview-product-action.js
 
 define([
@@ -100,13 +97,11 @@ define([
         })
     }
 );
-
 ```
 
 See more actions: `vendor/akeneo/pim-community-dev/src/Pim/Bundle/DataGridBundle/Resources/public/js/datagrid/action/`
 
 2. Register the action
-
 
 ```yaml
 # src/Acme/Bundle/AppBundle/Resources/config/requirejs.yml
@@ -124,7 +119,9 @@ config:
 
 ### See it in action
 
-1. Go to your product grid
+1. Go to your product grid.
 2. Now you can see a new action icon in the grid row (4th icon):
+
 ![New action icon](image/new-preview-action.png)
+
 3. Click on it and see an alert.
