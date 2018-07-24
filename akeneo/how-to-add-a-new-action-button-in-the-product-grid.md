@@ -8,8 +8,6 @@ Show a simple alert with product id by clicking on this button for the sake of d
 1. Implement an event listener that modifies a datagrid configuration
 
 ```php
-<?php
-
 // src/Acme/Bundle/AppBundle/EventListener/PreviewActionProductGridListener.php
 
 namespace Acme\Bundle\AppBundle\EventListener;
@@ -43,8 +41,6 @@ class PreviewActionProductGridListener
 2. Implement a new action class with no logic
 
 ```php
-<?php
-
 // src/Acme/Bundle/AppBundle/Datagrid/PreviewProductAction.php
 
 namespace Acme\Bundle\AppBundle\Datagrid;
