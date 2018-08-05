@@ -10,19 +10,23 @@ Audience: developers / all proficiency levels
 
 ## Intro
 
-Product Information Management (PIM) systems are a class of software 
-that enables the management and maintenance of product data.
+Many companies have experienced problems with managing their product catalogs
+in Excel spreadsheets and replaced them with Product Information Management (PIM) 
+systems.
 
-Akeneo PIM is one of the leading open source enterprise solutions 
-which helps companies to centralize their product information 
-to enrich, translate and export it to multiple channels.
+PIM allows to centralize and improve product data and 
+significantly simplifies product management and maintenance.
 
-Akeneo is a web-based software platform that has user friendly UI and
-plenty of features. 
+One of the leading enterprise PIM solutions is Akeneo PIM - 
+a web-based open source software platform.
+Akeneo has fancy and friendly UI and plenty of features that enable
+companies to import, enrich, translate and distribute product inventories 
+to multiple channels.
 However, PIM is most effective when fully customized and tailored 
-to company specific needs. Fortunately for software developers, 
+to company specific needs. Fortunately for us, software developers,
 Akeneo is based on Symfony framework and inherits its powerful modularity 
 and high flexibility.
+?It allows to implement ...
 
 
 ## Architecture
@@ -34,62 +38,186 @@ For developers who are going to customize Akeneo it
 primarily means a well-organized application structure and a 
 possibility to use bundle system.
 
-Just like Symfony, Akeneo PIM introduces its own components.
-/ that contain business or technical logic 
-/ decoupled and reusable PHP libraries
+Developers can easily create their own controllers an console commands using 
+existing Akeneo services to manipulate product data, implement custom connectors 
+with external system and extend user interface with new features.
 
-Components are organized in 3 groups:
-1. `Akeneo` - general-purpose components, 
-1. `Pim` - components for the technical tasks related to product management,
-1. `PimEnterprise` - components for extended product management available only in the Enterprise Edition.
+Akeneo PIM relies on well-known for PHP developers Doctrine ORM.
+PIM models like products, product models, product groups, 
+associations and categories are Doctrine entities.
+Akeneo allows to override mappings for an entity field to extend 
+standard models with your own fields.
 
-Every component has corresponding bundles that contain the glue code to embed 
-the component into application.
+Performance of UI and REST API is ensured by using of the popular 
+search engine Elasticsearch. Akeneo uses elasticsearch-php library to query and update
+data stored in Elasticsearch indexes.
+Developers can not only manipulate data but also implement their own search filters and sorters.
 
+Just like Symfony, Akeneo PIM introduces own components - reusable decoupled libraries,
+that implement some specific business or technical logic. 
+Every component has corresponding bundle that contain the glue code to embed 
+the component into an application. Components and bundles belong to big sets of features  (like Domain-driven Design bounded contexts) 
+such as User Management, Channel, Tool, Platform, Pim/Enrichment, Pim/Structure etc.
 
 ![alt text](image/architecture.png)
 
-?entry poins: console, controllers?
 
 ## Extension points
 
 
-### Tagged services
+### Tagged services / Service tags
 
-?Akeneo core developers carefully took care of extensibility and
-used Registry pattern in order to allow external intergrators to
+/***
+
+...which means more than 70 different types of plugins...
+
+used Registry pattern in order to allow external integrators to
 implement their own logic to be injected in Akeneo application.
 
-
-What are tagged services.
-What do you need to register.
-What kinds of tagged services exist.
-Example with dashboard.
-
-Events
-
-Extending entities??
+From knp: Tags are the way to hook your services into different parts of the core system.
 
 
-Out-of-the box extension points
-
-Reference data 
+/***
 
 
-### What else?
-Decorating services?
+
+Akeneo core developers took care of platform's extensibility and
+implemented more than 70 hooks that make possible to add your 
+custom logic to different parts of the core system.
+To use such hook you just need to implement your own service and tag it
+in your service configuration.
+
+Examples of tagged services:
+* Attribute types (pim_catalog.attribute_type)
+* Search filters (pim_catalog.elasticsearch.query.product_filter)
+* Collectors of system information (pim_analytics.data_collector)
+* Batch jobs (akeneo_batch.job)
+* UI dashboard widgets (pim_dashboard.widget)
+* File transformation plugins, only in Enterprise Edition (akeneo_file_transformer.transformation)
 
 
-## Adding new functionality
+To demonstrate how to extend Akeneo with tagged services 
+let's create a very simple dashboard widget that displays a link to a page 
+about raising Ziggy - 
+
+Step 1. Create a class `ZiggyWidget` impementing `WidgetInterface` - 
+the contract of all Akeneo dashboard widgets:
+
+```php
+<?php
+
+// src/Acme/Bundle/AppBundle/Widget/ZiggyWidget.php
+
+namespace Acme\Bundle\AppBundle\Widget;
+
+use Pim\Bundle\DashboardBundle\Widget\WidgetInterface;
+
+class ZiggyWidget implements WidgetInterface
+{
+    public function getAlias()
+    {
+        return 'ziggy';
+    }
+
+    public function getTemplate()
+    {
+        return 'AcmeAppBundle:Widget:ziggy.html.twig';
+    }
+
+    public function getParameters()
+    {
+        return [
+            'text' => 'How To Raise A Ziggy',
+            'link' => 'https://ziggy.akeneo.com/'
+        ];
+    }
+
+    // No real data needed for our simple example
+    public function getData()
+    {
+        return [];
+    }
+}
+
+```
+
+Step 2. Register this class as a service and tag it with the `pim_dashboard.widget` tag
+to inform Akeneo about our new widget:
+
+```yaml
+services:
+    acme_app.widget.ziggy_widget:
+        class: Acme\Bundle\AppBundle\Widget\ZiggyWidget
+        tags:
+            # Set negative value for the position to make your widget above others
+            - { name: pim_dashboard.widget, position: -120 }
+```
+
+Step 3. Create the template:
+
+```twig
+{% extends 'PimDashboardBundle:Widget:base.html.twig' %}
+
+{% set widgetTitle = 'Ziggy The Hydra' %}
+
+{% set widgetContent %}
+    <ul>
+        <li>
+            <a href="{{ link }}">{{ text }}</a>
+        </li>
+    </ul>
+{% endset %}
+```
+
+Step 4. Clear cache and find your widget on the `Activity > Dashboard` page:
+![Ziggy widget](image/ziggy-widget.png)
+
+
+
+
+
+
+### Event System
+
+Another typical approach to extend a functionality of a Symfony 
+application is to implement your custom business logic using the event system.
+
+Akeneo implements 
+
+??? from docs: lots of event notifications are triggered. 
+Your application can listen to these notifications and respond to them by executing any piece of code.
+
+
+
+What is event
+Types of events
+Examples
+
+
+
+## What else
+
+The fact that Akeneo is a Symfony application means unlimited space of...
 
 
 Custom bundles using PIM services
 
+Besides the extension points there are just normal functionality 
+that allows to extend Akeneo functionality
+reference data
+custom rules
+custom api endpoints
+Extending entities??
+
+
+Final word
+?
+
+
+----------------------------------------
 
 ## Akeneo extension points
 
-* Events
-* Tagged services: pim_enrich.mass_edit_action, 
 * Decorating services
 * Reference data
 * custom action rule? (EE) https://docs.akeneo.com/latest/manipulate_pim_data/rule/index.html
