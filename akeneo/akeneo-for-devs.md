@@ -1,4 +1,4 @@
-# Akeneo PIM for developers: application stack ND extension points
+# Akeneo PIM for developers: application stack and extension points
 
 Managing products of your web-shop is often a very challenging task.
 Incomplete or unclean product information, inconsistent attribute data, 
