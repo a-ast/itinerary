@@ -258,39 +258,11 @@ In the real application please consider using [Akeneo rules engine](https://help
 
 
 
-## What else
+## Final word
+
+Tagged services and events are not the only ways of extending an Akeneo application.
+You can find many other ways to implement your features inside Akeneo PIM:
+e.g., you can add new types of reference data, implement custom API endpoints,
+programmatically add new measures and many other things.
 
 The fact that Akeneo is a Symfony application means unlimited space of...
-
-
-Custom bundles using PIM services
-
-Besides the extension points there are just normal functionality 
-that allows to extend Akeneo functionality
-reference data
-custom rules
-custom api endpoints
-Extending entities??
-
-
-Final word
-?
-
-
-----------------------------------------
-
-## Akeneo extension points
-
-* Decorating services
-* Reference data
-* custom action rule? (EE) https://docs.akeneo.com/latest/manipulate_pim_data/rule/index.html
-* config: programmatically add new measures. metrics? https://docs.akeneo.com/latest/manipulate_pim_data/catalog_structure/how_to_add_a_custom_unit_of_measure.html
-* Customize Product Assets (EE) https://docs.akeneo.com/latest/manipulate_pim_data/product_asset/index.html
-
-* adding jobs?
-
-Not recomended: extend entity
-BUUUT: here how to extend: https://docs.akeneo.com/latest/manipulate_pim_data/category/add_new_properties_to_a_category.html
-?
-
-
