@@ -25,7 +25,7 @@ almost any specific requirements.
 Platforms like Drupal, Spryker, Magento 2 use Symfony components.
 Akeneo is not only using these components, but relies on the Symfony full-stack framework.
 For developers who need to customize Akeneo it 	
-means primarily a well-organized application structure and a 
+means primarily a well-organized application structure, enabled HTTP Foundation, service container and a 
 possibility to use a bundle system.
 
 Working with Akeneo, you can easily create own controllers and console commands using 
