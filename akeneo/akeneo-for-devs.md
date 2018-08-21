@@ -262,8 +262,10 @@ In the real application please consider using [Akeneo rules engine](https://help
 ## Final word
 
 Tagged services and events are not the only ways of extending an Akeneo application.
-You can find many other ways to implement your features inside Akeneo PIM:
+You can find many other guides how to implement your features inside Akeneo PIM:
 e.g., you can add new types of reference data, implement custom API endpoints,
-programmatically add new measures and many other things.
+programmatically add new units of measures and many other things.
 
-The fact that Akeneo is a Symfony application means unlimited space of...
+The fact that Akeneo PIM is a Symfony application also means all advantages of Symfony are included: 
+high extensibility, ease of use and debugging, excellent documentation,
+thousands of existing bundles, technical blog posts and articles. 
