@@ -79,7 +79,7 @@ To demonstrate how to extend Akeneo with tagged services
 let's create a very simple dashboard widget that displays a link to a page 
 about raising Ziggy - the Akeneo's mascot, nice three-headed hydra.
 
-??? Own foto
+![alt text](image/ziggy-inviqa.png)
 
 
 Step 1. Create a class `ZiggyWidget` implementing `WidgetInterface` - 
