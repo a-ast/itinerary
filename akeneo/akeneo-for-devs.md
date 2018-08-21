@@ -139,6 +139,8 @@ services:
 Step 3. Create the template:
 
 ```twig
+{# src/Acme/Bundle/AppBundle/Resources/views/Widget/ziggy.html.twig #}
+
 {% extends 'PimDashboardBundle:Widget:base.html.twig' %}
 
 {% set widgetTitle = 'Ziggy The Hydra' %}
