@@ -169,14 +169,14 @@ This table shows some of the most important types of events:
 |------------|-------------|
 | Storage events | <ul><li>product is saved to the database</li></ul> |
 | Workflow events (only in Enterprise Edition) | <ul><li>product draft is sent for approval</li><li>product draft change is approved</li><li>product draft is approved, rejected or deleted</li></ul> |
-| Grid events | data grid is rendered |
+| Grid events | <ul><li>data grid is rendered</li></ul> |
 
 To demonstrate the usage of the event system, let's implement a service 
 that assigns all red products from a gift category
 to a special product group called 'Xmas Gift ideas'.
 
 Step 1. Create the event subscriber class `AddProductsToXmasGiftIdeasGroupSubscriber`
-that listens for `StorageEvents::PRE_SAVE` events.
+that listens for `StorageEvents::PRE_SAVE` events:
 
 ```php
 <?php
@@ -239,7 +239,7 @@ class AddProductsToXmasGiftIdeasGroupSubscriber implements EventSubscriberInterf
 }
 ```
 
-Step 2. Register the subscriber.
+Step 2. Register the subscriber:
 
 ```yaml
 # src/Acme/Bundle/AppBundle/Resources/config/services.yml
@@ -253,9 +253,10 @@ services:
 
 ```
 
-Important note: the code above is create only for demonstration of catching Akeneo events.  
-In the real application please consider using [Akeneo rules engine](https://help.akeneo.com/articles/what-is-a-rule.html).
+Step 3. Create or edit a product in the category with the identifier 'gifts', change its color to red, save it and check if it is assigned to the 'Xmas Gift ideas' product group. 
 
+Important note: the code above is created only for the demonstration purpose.  
+In the real application please consider using [Akeneo rules engine](https://help.akeneo.com/articles/what-is-a-rule.html) that allows to enrich product data based on predefined rules (available only in Enterprise Edition).
 
 
 ## Final word
