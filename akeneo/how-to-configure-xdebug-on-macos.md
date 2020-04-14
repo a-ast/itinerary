@@ -1,4 +1,4 @@
-# How to configure Xdebug for the Akeneo PIM development on Mac
+# How to configure Xdebug for the Akeneo 3.x on Mac
 
 ## Problem
 
