@@ -11,7 +11,7 @@ but it helps only to setup Xdebug for cli for mac users.
 ### Step 1. Extend your docker-compose configurations:
 
 ```yaml
-docker-compose.override.yml
+# docker-compose.override.yml
 
 fpm:
   image: 'akeneo/fpm:php-7.1'
